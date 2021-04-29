@@ -9,6 +9,17 @@
      background-color: black;
      
   }
+.photoModal {
+    width: 200px;
+     height: 250px;
+     position: absolute;
+     left: 0%;
+     right: 0%;
+     top: 30%; 
+     margin:0 auto;
+     background-color: rgb(92, 68, 68);
+     
+  }
 
   .center{
     display: flex;

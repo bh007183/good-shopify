@@ -1,7 +1,13 @@
 .imgContainer{
     width: 200px;
     contain: content;
+    border: olivedrab;
+    border-width: 5px;
+    border-style: outset
 }
 .image{
+    width: 100%;
+}
+.deleteButton{
     width: 100%;
 }

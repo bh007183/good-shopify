@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../models");
+const jwt = require("jsonwebtoken")
 
 router.post("/api/singlepost", async (req, res) => {
   let token = false;
@@ -21,7 +22,14 @@ router.post("/api/singlepost", async (req, res) => {
       }
     });
     if (tokenMatch) {
-      const data = await db.Image.create(req.body).catch((err) =>
+      
+      const data = await db.Image.create({
+        url: req.body.url,
+        title: req.body.title,
+        category: req.body.category,
+        public: req.body.public,
+        UserId: tokenMatch.id
+      }).catch((err) =>
         res.status(404).json(err)
       );
       res.json(data);

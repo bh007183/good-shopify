@@ -1,31 +1,72 @@
-
 import React from "react";
-import Typography from "@material-ui/core/Typography"
-import Toolbar from "@material-ui/core/Toolbar"
-import LoginModal from "./loginModal"
-import "./style.css"
+import Typography from "@material-ui/core/Typography";
+import Toolbar from "@material-ui/core/Toolbar";
+import LoginModal from "./loginModal";
+import "./style.css";
+import { useSelector, useDispatch } from "react-redux";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import {addImage} from "../store/imageSlice"
+import PhotoModal from "./photoModal"
 
 export default function Header() {
-    const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+  const [openLogin, SetOpenLogin] = React.useState(false);
+  const [openPhoto, setOpenPhoto] = React.useState(false)
+
+  const user = useSelector((state) => state.store.User.CurrentUser);
+  console.log(user);
+
+  const handleOpenLogin = () => {
+    SetOpenLogin(true);
+  };
+
+  const handleCloseLogin = () => {
+    SetOpenLogin(false);
+  };
+
+  ////////////////
+  const handleOpenPhoto= () => {
+    setOpenPhoto(true);
+  };
+
+  const handleClosePhoto= () => {
+    setOpenPhoto(false);
+  };
 
 
-    const handleOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
   return (
     <>
       <Toolbar className="toolBar">
         <Typography id="header" variant="h6">
           Welcome to the Image Database!
         </Typography>
-        {/* onClick={handleOpen} */}
-        <button onClick={handleOpen}>Sign In</button>
+        {!user ? (
+          <button onClick={handleOpenLogin}>Sign In</button>
+        ) : (<>
+          
+          <FormControl>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              
+            >
+              <MenuItem value="" disabled>
+                {user}
+              </MenuItem>
+              <MenuItem onClick={handleOpenPhoto}>Add Photo</MenuItem>
+              <MenuItem >View Your Photos</MenuItem>
+              
+            </Select>
+            <FormHelperText>{user}</FormHelperText>
+            </FormControl>
+            </>
+        )}
       </Toolbar>
-      <LoginModal open={open} handleClose={handleClose} />
+      <PhotoModal openPhoto={openPhoto} handleClosePhoto={handleClosePhoto}/>
+      <LoginModal openLogin={openLogin} handleCloseLogin={handleCloseLogin} />
     </>
   );
 }

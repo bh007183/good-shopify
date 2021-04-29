@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
     if (validate) {
       jwt.sign(
         {
-          email: data.dataValues,
+          email: data.email,
           id: data.id,
         },
         process.env.JWS_TOKEN,
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
           if (err) {
             res.json("Error connecting token");
           }
-          res.json({ token, user: data.email.substring(0, data.email.indexOf("@")) });
+          res.json({ token, user: data.email.substring(0, data.email.indexOf("@")), id: data.id });
         }
       );
     } else {

@@ -32,8 +32,8 @@ export default function LoginModal(props) {
 
   return (
     <Modal
-    open={props.open}
-    onClose={props.handleClose}
+    open={props.openLogin}
+    onClose={props.handleCloseLogin}
   >
     <div className="loginModal" style={{ contain: "content" }}>
       <br></br>

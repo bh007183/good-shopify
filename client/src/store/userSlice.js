@@ -13,7 +13,7 @@ const slice = createSlice({
         setUser: (User, action)=>{
             User.CurrentUser = action.payload.user
             localStorage.setItem("token", action.payload.token)
-            console.log(action.payload)
+            localStorage.setItem("id", action.payload.id)
         },
         // setError: (User, action)=>{
         //     User.onError = [action.payload.response.data]
