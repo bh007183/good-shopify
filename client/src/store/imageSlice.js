@@ -6,7 +6,7 @@ const slice = createSlice({
     name: "Image",
     initialState:{
         publicImage:[],
-        addImage:[]
+        yourImage:[]
 
 
     },
@@ -15,13 +15,13 @@ const slice = createSlice({
             Image.publicImage = action.payload
         },
 
-        // addImage: (Image, action)=>{
-        //     Image.addImage.push(action.payload)
-        //     console.log(action)
-        // }
+        yourImage: (Image, action)=>{
+            Image.yourImage = action.payload
+            console.log(action)
+        }
     }
 })
-export const {setImage, addImage} = slice.actions
+export const {setImage, yourImage} = slice.actions
 export default slice.reducer
 
 export const getPublic = () => apiCallBegan({
@@ -34,12 +34,21 @@ export const postImage = (data) => apiCallBegan({
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     data: data,
     method: "POST",
-    onSuccess: setImage.type
+    
 
 })
 export const deleteImage = (id) => apiCallBegan({
-    url: `http://localhost:3001/api/delete/:${id}`,
+    url: `http://localhost:3001/api/delete/${id}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
-    method: "Delete",
+    method: "DELETE",
     onSuccess: setImage.type
+    
+})
+
+export const getYourPhotos = () => apiCallBegan({
+    url: `http://localhost:3001/api/yourphotos`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: setImage.type
+    
 })

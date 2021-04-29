@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import {addImage} from "../store/imageSlice"
 import PhotoModal from "./photoModal"
+import {getYourPhotos} from "../store/imageSlice"
 
 export default function Header() {
   const dispatch = useDispatch()
@@ -35,6 +36,9 @@ export default function Header() {
   const handleClosePhoto= () => {
     setOpenPhoto(false);
   };
+  const getYours = async() =>{
+    await dispatch(getYourPhotos())
+  }
 
 
   return (
@@ -57,7 +61,8 @@ export default function Header() {
                 {user}
               </MenuItem>
               <MenuItem onClick={handleOpenPhoto}>Add Photo</MenuItem>
-              <MenuItem >View Your Photos</MenuItem>
+              <MenuItem onClick={getYours}>View Your Photos</MenuItem>
+              <MenuItem onClick={getYours}>Logout</MenuItem>
               
             </Select>
             <FormHelperText>{user}</FormHelperText>

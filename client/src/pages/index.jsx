@@ -16,8 +16,9 @@ export default function Main() {
     const publicImages = useSelector(state => state.store.Image.publicImage )
 
 
-    const handleDelete = event => {
-        dispatch(deleteImage(event.target.value))
+    const handleDelete = async event => {
+        await dispatch(deleteImage(event.target.value))
+        await dispatch(getPublic())
     }
 
     return (

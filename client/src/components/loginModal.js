@@ -26,6 +26,7 @@ export default function LoginModal(props) {
   const submitForm = (event) => {
     event.preventDefault();
     dispatch(loginApi(login));
+    props.handleCloseLogin()
   };
 
   

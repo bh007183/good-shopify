@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { postImage } from "../store/imageSlice";
 import Modal from "@material-ui/core/Modal"
 import Switch from "@material-ui/core/Switch"
+import {getPublic} from "../store/imageSlice"
 
 
 export default function PhotoModal(props) {
@@ -13,7 +14,7 @@ export default function PhotoModal(props) {
     url: "",
     title: "",
     category: "",
-    public: "",
+    public: "false",
   });
 
 
@@ -33,6 +34,7 @@ export default function PhotoModal(props) {
       }
     }
   );
+ 
 
   const onChange = (event) => {
     const name = event.target.name;
@@ -44,9 +46,11 @@ export default function PhotoModal(props) {
     });
   };
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    dispatch(postImage(photo))
+    await dispatch(postImage(photo))
+    // await dispatch(getPublic())
+    props.handleClosePhoto()
 
     
   };
@@ -90,12 +94,12 @@ export default function PhotoModal(props) {
            
           </Grid>
           <Grid className="center" item xs={12}>
-            <button onClick={() => widget.open()}>
+            <button type="button" onClick={() => widget.open()}>
              Add Photo
             </button>
           </Grid>
           <Grid className="center" item xs={12}>
-            <button type="submit">Enter</button>
+           {photo.url === "" ? <></> : <button type="submit" >Enter</button>  } 
           </Grid>
         </Grid>
       </form>
