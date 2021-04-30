@@ -61,7 +61,7 @@ export const getYourPhotos = () =>
     url: `http://localhost:3001/api/yourphotos`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
-    onSuccess: setImage.type,
+    onSuccess: yourImage.type,
   });
 
 export const getEditImage = (id) =>
@@ -78,5 +78,5 @@ export const updateImage = (data) =>
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "PUT",
     data: data,
-    onSuccess: window.location.href = "/"
+    // onSuccess: window.location.href = "/"
   });

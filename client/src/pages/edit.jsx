@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector} from "react-redux";
 import { postImage } from "../store/imageSlice";
+import {Link} from "react-router-dom"
 
 import Switch from "@material-ui/core/Switch"
 import {updateImage} from "../store/imageSlice"
@@ -102,10 +103,14 @@ export default function EditPhoto(props) {
             </button>
           </Grid>
           <Grid className="center" item xs={12}>
-           {editPhoto.url === "" ? <></> : <button type="submit" >Submit Changes</button>  } 
+           {editPhoto.url === "" ? <></> : <button type="submit" >Submit Changes</button> } 
           </Grid>
+          
+            
         </Grid>
       </form>
+      <br></br>
+      <Link to="/yours" style={{color: "white"}}> Back</Link>
     </div>
     
   );

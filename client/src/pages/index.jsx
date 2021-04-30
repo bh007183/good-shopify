@@ -19,7 +19,7 @@ export default function Main() {
     }, [])
     
     const publicImages = useSelector(state => state.store.Image.publicImage )
-    const currentUserId = useSelector(state => state.store.User.CurrentUserId)
+    
 
 
     const handleDelete = async event => {
@@ -38,9 +38,9 @@ export default function Main() {
             {publicImages.length >= 1 ? (publicImages.map((image, index) => 
             <Grid key={index} item xs={6} sm={4} md={3} >
                 <div  className="imgContainer">
-                    {image.UserId === currentUserId ? <button value={image.id} onClick={handleDelete} className="deleteButton">Remove Your Photo</button> : <></>}
+                    
                     <img className="image" src={image.url} alt={image.title}/>
-                    {image.UserId === currentUserId ? <Link to="/edit"><button onClick={editImage}value={image.id}  className="deleteButton">Edit Your Photo</button> </Link>: <></>}
+                    
                 </div>
             </Grid>)) : <></> }
  

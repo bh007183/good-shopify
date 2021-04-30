@@ -2,15 +2,15 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import LoginModal from "./loginModal";
+import {Link} from "react-router-dom"
 import "./style.css";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {addImage} from "../store/imageSlice"
 import PhotoModal from "./photoModal"
-import {getYourPhotos} from "../store/imageSlice"
+// import {getYourPhotos} from "../store/imageSlice"
 import {logOut} from "../store/userSlice"
 import {getPublic} from "../store/imageSlice"
 
@@ -38,16 +38,12 @@ export default function Header() {
   const handleClosePhoto= () => {
     setOpenPhoto(false);
   };
-  const getYours = async() =>{
-    await dispatch(getYourPhotos())
-  }
+ 
   const clearUser = async() => {
     await dispatch(logOut(""))
     await localStorage.clear()
   }
-  const viewAll = async() => {
-    await dispatch(getPublic())
-  }
+
 
 
   return (
@@ -70,8 +66,8 @@ export default function Header() {
                 {user}
               </MenuItem>
               <MenuItem onClick={handleOpenPhoto}>Add Photo</MenuItem>
-              <MenuItem onClick={getYours}>View Your Photos</MenuItem>
-              <MenuItem onClick={viewAll}>View Public Photos</MenuItem>
+              <Link to="/yours"><MenuItem >View Your Photos</MenuItem></Link>
+              <Link to="/"><MenuItem >View Public Photos</MenuItem></Link>
               <MenuItem onClick={clearUser}>Logout</MenuItem>
               
               

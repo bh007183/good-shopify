@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import Header from "./components/header";
 import CreateAccount from "./pages/create.jsx";
 import EditPhoto from "./pages/edit"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import YourPhotos from "./pages/myphotos.jsx"
 
 const store = configureStore();
 
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route exact path="/edit">
           <EditPhoto />
+        </Route>
+        <Route exact path="/yours">
+          <YourPhotos />
         </Route>
       </Router>
     </Provider>

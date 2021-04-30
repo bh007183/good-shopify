@@ -5,6 +5,7 @@ import { postImage } from "../store/imageSlice";
 import Modal from "@material-ui/core/Modal"
 import Switch from "@material-ui/core/Switch"
 import {getPublic} from "../store/imageSlice"
+import {getYourPhotos} from "../store/imageSlice"
 
 
 export default function PhotoModal(props) {
@@ -49,7 +50,12 @@ export default function PhotoModal(props) {
   const submitForm = async (event) => {
     event.preventDefault();
     await dispatch(postImage(photo))
-    await dispatch(getPublic())
+    if(window.location.pathname === "/"){
+      await dispatch(getPublic())
+    }else{
+      dispatch(getYourPhotos())
+    }
+    
     props.handleClosePhoto()
 
     
