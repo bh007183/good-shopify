@@ -3,6 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
 import { loginApi } from "../store/userSlice";
 import Modal from "@material-ui/core/Modal"
+import {
+  Link
+} from "react-router-dom";
 
 
 export default function LoginModal(props) {
@@ -64,6 +67,8 @@ export default function LoginModal(props) {
           </Grid>
         </Grid>
       </form>
+      <br></br>
+      <Link to="/create" style={{color: "white", fontSize: "10px"}}>Create Account</Link>
     </div>
     </Modal>
   );

@@ -6,22 +6,26 @@ const slice = createSlice({
     name: "User",
     initialState:{
         CurrentUser: '',
-        onError: []
+        CurrentUserId: "",
+         onError: []
 
     },
     reducers:{
         setUser: (User, action)=>{
             User.CurrentUser = action.payload.user
+            User.CurrentUserId = action.payload.id
             localStorage.setItem("token", action.payload.token)
-            localStorage.setItem("id", action.payload.id)
-        },
-        // setError: (User, action)=>{
-        //     User.onError = [action.payload.response.data]
             
-        // }
+        },
+        logOut: (User, action)=>{
+            console.log(action)
+            User.CurrentUser = action.payload;
+            User.CurrentUserId = action.payload;
+            
+        }
     }
 })
-export const {setUser} = slice.actions
+export const {setUser, logOut} = slice.actions
 export default slice.reducer
 
 export const loginApi = (data) => apiCallBegan({
@@ -29,6 +33,14 @@ export const loginApi = (data) => apiCallBegan({
     method: "POST",
     data: data,
     onSuccess: setUser.type,
+    // onError: setError.type
+    
+})
+export const createApi = (data) => apiCallBegan({
+    url: "http://localhost:3001/api/createAccount",
+    method: "POST",
+    data: data,
+    onSuccess: window.location.href = "/",
     // onError: setError.type
     
 })

@@ -11,6 +11,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import {addImage} from "../store/imageSlice"
 import PhotoModal from "./photoModal"
 import {getYourPhotos} from "../store/imageSlice"
+import {logOut} from "../store/userSlice"
+import {getPublic} from "../store/imageSlice"
 
 export default function Header() {
   const dispatch = useDispatch()
@@ -39,6 +41,13 @@ export default function Header() {
   const getYours = async() =>{
     await dispatch(getYourPhotos())
   }
+  const clearUser = async() => {
+    await dispatch(logOut(""))
+    await localStorage.clear()
+  }
+  const viewAll = async() => {
+    await dispatch(getPublic())
+  }
 
 
   return (
@@ -62,7 +71,9 @@ export default function Header() {
               </MenuItem>
               <MenuItem onClick={handleOpenPhoto}>Add Photo</MenuItem>
               <MenuItem onClick={getYours}>View Your Photos</MenuItem>
-              <MenuItem onClick={getYours}>Logout</MenuItem>
+              <MenuItem onClick={viewAll}>View Public Photos</MenuItem>
+              <MenuItem onClick={clearUser}>Logout</MenuItem>
+              
               
             </Select>
             <FormHelperText>{user}</FormHelperText>
