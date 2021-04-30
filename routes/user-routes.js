@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 
+//CREATE ACCOUNT ROUTE//
+
 router.post("/api/createAccount", async (req, res) => {
   const hashedPass = bcrypt.hashSync(req.body.password, saltRounds);
   const data = await db.User.create({
@@ -15,6 +17,9 @@ router.post("/api/createAccount", async (req, res) => {
   }).catch((err) => res.status(404).json(err));
   res.json(data);
 });
+
+
+//LOGIN ROUTE//
 
 router.post("/login", async (req, res) => {
   const data = await db.User.findOne({
