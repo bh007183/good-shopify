@@ -36,7 +36,7 @@ export default function Main() {
     return (
         <Grid container spacing={2} direction="row">
             {publicImages.length >= 1 ? (publicImages.map((image, index) => 
-            <Grid key={index} item xs={6} sm={4} md={3} >
+            <Grid  key={index} item xs={6} sm={4} md={3} >
                 <div  className="imgContainer">
                     
                     <img className="image" src={image.url} alt={image.title}/>
