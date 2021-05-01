@@ -1,3 +1,6 @@
+.Modal{
+  border: none !important;
+}
 .loginModal {
     width: 200px;
      height: 200px;

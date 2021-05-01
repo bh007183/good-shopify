@@ -36,6 +36,7 @@ export default function LoginModal(props) {
 
   return (
     <Modal
+    className="Modal"
     open={props.openLogin}
     onClose={props.handleCloseLogin}
   >
@@ -44,7 +45,7 @@ export default function LoginModal(props) {
       <br></br>
       <br></br>
       <form onSubmit={submitForm}>
-        <Grid container spacing={2} direction="row">
+        <Grid container direction="row">
           <Grid className="center" item xs={12}>
             <input
               onChange={onChange}
@@ -53,6 +54,10 @@ export default function LoginModal(props) {
               placeholder="Email"
             ></input>
           </Grid>
+          <Grid xs={12}>
+            <br></br>
+          </Grid>
+          
           <Grid className="center" item xs={12}>
             <input
               onChange={onChange}
@@ -61,6 +66,9 @@ export default function LoginModal(props) {
               placeholder="Password"
               name="password"
             ></input>
+          </Grid>
+          <Grid xs={12}>
+            <br></br>
           </Grid>
           <Grid className="center" item xs={12}>
             <button type="submit">Enter</button>
