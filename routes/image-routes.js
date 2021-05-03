@@ -31,7 +31,7 @@ router.post("/api/singlepost", async (req, res) => {
         public: req.body.public,
         UserId: tokenMatch.id,
       }).catch((err) => res.status(404).json(err));
-      res.json(data);
+      res.status(200).json(data);
     } else {
       res
         .status(403)
@@ -207,7 +207,7 @@ router.get("/api/getpublic", async (req, res) => {
       public: true,
     },
   }).catch((err) => res.status(404).json(err));
-  res.json(data);
+  res.status(200).json(data);
 });
 
 module.exports = router;
