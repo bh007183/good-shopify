@@ -9,11 +9,11 @@ var PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'https://bjh-hop-estore.herokuapp.com'
-// }
+var corsOptions = {
+  origin: 'https://img-direct-shop.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 // Static directory
 app.use(express.static("public"));
 /////////////////////////////////
