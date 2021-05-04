@@ -29,7 +29,7 @@ export const {setUser, logOut} = slice.actions
 export default slice.reducer
 
 export const loginApi = (data) => apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/login",
+    url: "http://localhost:3001/login",
     method: "POST",
     data: data,
     onSuccess: setUser.type,
@@ -37,7 +37,7 @@ export const loginApi = (data) => apiCallBegan({
     
 })
 export const createApi = (data) => apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/api/createAccount",
+    url: "http://localhost:3001/api/createAccount",
     method: "POST",
     data: data,
     onSuccess: window.location.href = "/",
