@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postImage } from "../store/imageSlice";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-import Switch from "@material-ui/core/Switch"
-import {updateImage} from "../store/imageSlice"
-
-
+import Switch from "@material-ui/core/Switch";
+import { updateImage } from "../store/imageSlice";
 
 export default function EditPhoto(props) {
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState(false);
-  const imageData = useSelector(state => state.store.Image.ImageID)
+  const imageData = useSelector((state) => state.store.Image.ImageID);
 
   const [editPhoto, setEditPhoto] = useState({
     url: "",
     title: "",
     category: "",
     public: false,
-    id: ""
+    id: "",
   });
 
   useEffect(() => {
-    setEditPhoto(imageData)
-}, [imageData])
+    setEditPhoto(imageData);
+  }, [imageData]);
 
   let widget = window.cloudinary.createUploadWidget(
     {
@@ -33,16 +31,14 @@ export default function EditPhoto(props) {
     },
     (error, result) => {
       if (result.event === "success") {
-        console.log(result)
+        console.log(result);
         setEditPhoto({
-            ...editPhoto,
-            url: result.info.url,
-          });
-
+          ...editPhoto,
+          url: result.info.url,
+        });
       }
     }
   );
- 
 
   const onChange = (event) => {
     const name = event.target.name;
@@ -56,22 +52,16 @@ export default function EditPhoto(props) {
 
   const submitForm = async (event) => {
     event.preventDefault();
-    await dispatch(updateImage(editPhoto))
+    await dispatch(updateImage(editPhoto));
     // await dispatch(getPublic())
-
-    
   };
 
-  
-
   return (
-    
     <div className="photoModal" style={{ contain: "content" }}>
       <br></br>
-      
+
       <form onSubmit={submitForm}>
         <Grid container spacing={2} direction="row">
-          
           <Grid className="center" item xs={12}>
             <input
               onChange={onChange}
@@ -89,29 +79,40 @@ export default function EditPhoto(props) {
             ></input>
           </Grid>
           <Grid className="center" item xs={12}>
-              <p>Private</p>
-          <Switch name="public" checked={editPhoto.public} value={editPhoto.public} onChange={(event) => setEditPhoto({
-      ...editPhoto,
-      public: event.target.checked,
-    })} type="checkbox"/>
-    <p>Public</p>
-           
+            <p>Private</p>
+            <Switch
+              name="public"
+              checked={editPhoto.public}
+              value={editPhoto.public}
+              onChange={(event) =>
+                setEditPhoto({
+                  ...editPhoto,
+                  public: event.target.checked,
+                })
+              }
+              type="checkbox"
+            />
+            <p>Public</p>
           </Grid>
           <Grid className="center" item xs={12}>
             <button type="button" onClick={() => widget.open()}>
-             Change Photo
+              Change Photo
             </button>
           </Grid>
           <Grid className="center" item xs={12}>
-           {editPhoto.url === "" ? <></> : <button type="submit" >Submit Changes</button> } 
+            {editPhoto.url === "" ? (
+              <></>
+            ) : (
+              <button type="submit">Submit Changes</button>
+            )}
           </Grid>
-          
-            
         </Grid>
       </form>
       <br></br>
-      <Link to="/yours" style={{color: "white"}}> Back</Link>
+      <Link to="/yours" style={{ color: "white" }}>
+        {" "}
+        Back
+      </Link>
     </div>
-    
   );
 }

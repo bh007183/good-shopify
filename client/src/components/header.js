@@ -13,6 +13,7 @@ import PhotoModal from "./photoModal"
 // import {getYourPhotos} from "../store/imageSlice"
 import {logOut} from "../store/userSlice"
 import {getPublic} from "../store/imageSlice"
+import {deleteAccount} from "../store/userSlice"
 
 export default function Header() {
   const dispatch = useDispatch()
@@ -20,7 +21,8 @@ export default function Header() {
   const [openPhoto, setOpenPhoto] = React.useState(false)
 
   const user = useSelector((state) => state.store.User.CurrentUser);
-  console.log(user);
+  const userid = useSelector((state) => state.store.User.CurrentUserId);
+  // console.log(user);
 
   const handleOpenLogin = () => {
     SetOpenLogin(true);
@@ -42,6 +44,11 @@ export default function Header() {
   const clearUser = async() => {
     await dispatch(logOut(""))
     await localStorage.clear()
+    window.location.href = "/"
+  }
+  const deleteAll = async() => {
+    console.log("test")
+    await dispatch(deleteAccount(userid))
   }
 
 
@@ -69,6 +76,7 @@ export default function Header() {
               <Link to="/yours"><MenuItem >View Your Photos</MenuItem></Link>
               <Link to="/"><MenuItem >View Public Photos</MenuItem></Link>
               <MenuItem onClick={clearUser}>Logout</MenuItem>
+              <MenuItem onClick={deleteAll}>Delete Account</MenuItem>
               
               
             </Select>

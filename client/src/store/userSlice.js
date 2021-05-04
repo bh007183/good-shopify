@@ -44,3 +44,11 @@ export const createApi = (data) => apiCallBegan({
     // onError: setError.type
     
 })
+export const deleteAccount = (id) => apiCallBegan({
+    url: `http://localhost:3001/api/delete/user/${id}`,
+    headers: { authorization: "Bearer: " + localStorage.getItem("token") },
+    method: "Delete",
+    onSuccess: window.location.href = "/",
+    // onError: setError.type
+    
+})
