@@ -76,7 +76,7 @@ export default function LoginModal(props) {
         </Grid>
       </form>
       <br></br>
-      <Link to="/create" style={{color: "white", fontSize: "10px"}}>Create Account</Link>
+      <Link to="/create" onClick={props.handleCloseLogin} style={{color: "white", fontSize: "10px"}}>Create Account</Link>
     </div>
     </Modal>
   );
