@@ -28,10 +28,6 @@ const imageRoutes = require("./routes/image-routes.js")
 app.use(userRoutes)
 app.use(imageRoutes)
 
-
-
-
-
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 

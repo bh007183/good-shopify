@@ -45,6 +45,7 @@ router.post("/api/singlepost", async (req, res) => {
 ///////DELETE YOUR PHOTO/////////
 
 router.delete("/api/delete/:id", async (req, res) => {
+ 
   let token = false;
   if (!req.headers) {
     token = false;
@@ -70,7 +71,8 @@ router.delete("/api/delete/:id", async (req, res) => {
           UserId: tokenMatch.id,
         },
       }).catch((err) => res.status(404).json(err));
-      res.json(data);
+      res.status(200).json(data);
+     
     } else {
       res
         .status(403)
@@ -84,7 +86,7 @@ router.delete("/api/delete/:id", async (req, res) => {
 //////GET ALL YOUR PHOTOS///////////
 
 router.get("/api/yourphotos", async (req, res) => {
-  console.log(req.headers);
+ 
   let token = false;
   if (!req.headers) {
     token = false;
@@ -147,7 +149,7 @@ router.get("/api/edit/:id", async (req, res) => {
           UserId: tokenMatch.id,
         },
       }).catch((err) => res.status(404).json(err));
-      console.log(data);
+     
       res.json(data);
     } else {
       res
@@ -161,7 +163,7 @@ router.get("/api/edit/:id", async (req, res) => {
 
 /////////Update Image Route//////////
 router.put("/api/updateImage", async (req, res) => {
-  console.log(req.body);
+
   let token = false;
   if (!req.headers) {
     token = false;
@@ -187,7 +189,7 @@ router.put("/api/updateImage", async (req, res) => {
           UserId: tokenMatch.id,
         },
       }).catch((err) => res.status(404).json(err));
-      // console.log(data)
+      console.log(data)
       res.json(data);
     } else {
       res
