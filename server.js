@@ -5,8 +5,6 @@ const db = require("./models");
 // Sets up the Express App
 var PORT = process.env.PORT || 3001;
 
-
-
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,7 +20,6 @@ app.use(express.static("public"));
 const userRoutes = require("./routes/user-routes.js")
 const imageRoutes = require("./routes/image-routes.js")
 
-
 // Routes
 // =============================================================
 app.use(userRoutes)
@@ -30,8 +27,9 @@ app.use(imageRoutes)
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 // Change force: to true if it's cool for the site to remove database items.
 db.sequelize.sync({ force: false}).then(function () {
   app.listen(PORT, function () {
@@ -39,4 +37,5 @@ db.sequelize.sync({ force: false}).then(function () {
   });
 });
 
+// Export For Tests
 module.exports = app
