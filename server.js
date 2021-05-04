@@ -15,7 +15,9 @@ var corsOptions = {
 // corsOptions
 app.use(cors(corsOptions));
 // Static directory
-app.use(express.static("public"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 /////////////////////////////////
 const userRoutes = require("./routes/user-routes.js")
 const imageRoutes = require("./routes/image-routes.js")
@@ -27,7 +29,7 @@ app.use(imageRoutes)
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 // Change force: to true if it's cool for the site to remove database items.
