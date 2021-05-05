@@ -21,7 +21,7 @@ export default function CreateAccount() {
   const onChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
+    console.log(event)
     setCreate({
       ...create,
       [name]: value,
