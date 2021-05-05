@@ -55,7 +55,7 @@ export default slice.reducer
 // route for logging in//
 
 export const loginApi = (data) => apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/login",
+    url: "http://localhost:3001/login",
     method: "POST",
     data: data,
     onSuccess: setUser.type,
@@ -65,7 +65,7 @@ export const loginApi = (data) => apiCallBegan({
 
 //route for creating account//
 export const createApi = (data) => apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/api/createAccount",
+    url: "http://localhost:3001/api/createAccount",
     method: "POST",
     data: data,
     onSuccess: setSuccessMessage.type,
@@ -75,7 +75,7 @@ export const createApi = (data) => apiCallBegan({
 
 //route for deleting account and associated photos//
 export const deleteAccount = (id) => apiCallBegan({
-    url: `https://img-direct-shop.herokuapp.com/api/delete/user/${id}`,
+    url: `http://localhost:3001/api/delete/user/${id}`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "Delete",
     onSuccess: window.location.href = "/",

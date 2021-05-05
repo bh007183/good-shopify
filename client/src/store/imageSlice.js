@@ -42,13 +42,13 @@ export default slice.reducer;
 // Route gets all public images//
 export const getPublic = () =>
   apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/api/getpublic",
+    url: "http://localhost:3001/api/getpublic",
     onSuccess: setImage.type,
   });
 // Posts images//
 export const postImage = (data) =>
   apiCallBegan({
-    url: "https://img-direct-shop.herokuapp.com/api/singlepost",
+    url: "http://localhost:3001/api/singlepost",
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     data: data,
     method: "POST",
@@ -57,7 +57,7 @@ export const postImage = (data) =>
   // Deletes image //
 export const deleteImage = (id) =>
   apiCallBegan({
-    url: `https://img-direct-shop.herokuapp.com/api/delete/${id}`,
+    url: `http://localhost:3001/api/delete/${id}`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "DELETE",
     onSuccess: setImage.type,
@@ -66,7 +66,7 @@ export const deleteImage = (id) =>
   // gets all photos that are yours//
 export const getYourPhotos = () =>
   apiCallBegan({
-    url: `https://img-direct-shop.herokuapp.com/api/yourphotos`,
+    url: `http://localhost:3001/api/yourphotos`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: yourImage.type,
@@ -75,7 +75,7 @@ export const getYourPhotos = () =>
 // gets current information for photo you want to edit//
 export const getEditImage = (id) =>
   apiCallBegan({
-    url: `https://img-direct-shop.herokuapp.com/api/edit/${id}`,
+    url: `http://localhost:3001/api/edit/${id}`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: editImageResponse.type,
@@ -84,7 +84,7 @@ export const getEditImage = (id) =>
 // update route for image //
 export const updateImage = (data) =>
   apiCallBegan({
-    url: `https://img-direct-shop.herokuapp.com/api/updateImage`,
+    url: `http://localhost:3001/api/updateImage`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "PUT",
     data: data,
