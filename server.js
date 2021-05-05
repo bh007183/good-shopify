@@ -9,11 +9,11 @@ var PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'https://img-direct-shop.herokuapp.com'
-// }
+var corsOptions = {
+  origin: 'https://img-direct-shop.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 // Static directory
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -29,9 +29,9 @@ app.use(imageRoutes)
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 // Change force: to true if it's cool for the site to remove database items.
 db.sequelize.sync({ force: false}).then(function () {
   app.listen(PORT, function () {
