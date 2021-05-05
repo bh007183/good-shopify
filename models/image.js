@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
 
     });
     Image.associate = function (models){
-        Image.belongsTo(models.User)
+        Image.belongsTo(models.User, {foreignKeyConstraint: true, onDelete: 'cascade'})
     }
     return Image
   };

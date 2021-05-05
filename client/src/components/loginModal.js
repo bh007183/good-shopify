@@ -16,16 +16,18 @@ export default function LoginModal(props) {
     password: "",
   });
 
+  // local state change handler
+
   const onChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
     setLogin({
       ...login,
       [name]: value,
     });
   };
 
+  // submit form login
   const submitForm = (event) => {
     event.preventDefault();
     dispatch(loginApi(login));

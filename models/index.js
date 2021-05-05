@@ -6,6 +6,7 @@ const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 let testEnv = process.argv.slice(1);
 let env;
+// if NPM test is ran then env === "test"//
 if (
   testEnv[0] !== "/Users/benhopkins/code/shopify-back/node_modules/.bin/mocha"
 ) {
@@ -14,7 +15,6 @@ if (
   env = "test";
 }
 
-// const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 

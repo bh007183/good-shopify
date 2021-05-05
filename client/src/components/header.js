@@ -10,9 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import PhotoModal from "./photoModal"
-// import {getYourPhotos} from "../store/imageSlice"
 import {logOut} from "../store/userSlice"
-import {getPublic} from "../store/imageSlice"
 import {deleteAccount} from "../store/userSlice"
 
 export default function Header() {
@@ -20,34 +18,41 @@ export default function Header() {
   const [openLogin, SetOpenLogin] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false)
 
+  // store selector
   const user = useSelector((state) => state.store.User.CurrentUser);
   const userid = useSelector((state) => state.store.User.CurrentUserId);
   // console.log(user);
 
+// handles open of login modal
   const handleOpenLogin = () => {
     SetOpenLogin(true);
   };
 
+// handles close of login modal
   const handleCloseLogin = () => {
     SetOpenLogin(false);
   };
 
   ////////////////
+  // handles open of add photo modal
   const handleOpenPhoto= () => {
     setOpenPhoto(true);
   };
 
+// handles close of add photo modal
   const handleClosePhoto= () => {
     setOpenPhoto(false);
   };
  
+  // activates logout
   const clearUser = async() => {
     await dispatch(logOut(""))
     await localStorage.clear()
     window.location.href = "/"
   }
+
+  // activates delete account route
   const deleteAll = async() => {
-    console.log("test")
     await dispatch(deleteAccount(userid))
   }
 

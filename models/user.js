@@ -1,6 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define("User", {
     email: {
+      unique: true,
       type: DataTypes.STRING,
       allowNull: false,
       validate: { isEmail: true },
@@ -11,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
   User.associate = function (models){
-      User.hasMany(models.Image, {onDelete: 'cascade'})
+      User.hasMany(models.Image)
   }
   return User
 };

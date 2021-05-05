@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import Main from "./pages";
 import configureStore from "./store/storeConfigure";
@@ -9,13 +9,19 @@ import EditPhoto from "./pages/edit"
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import YourPhotos from "./pages/myphotos.jsx"
 
+
+
 const store = configureStore();
 
 function App() {
+
+ 
   return (
     <Provider store={store}>
+    
       <Router>
         <Header />
+       
         <Route exact path="/">
           <Main />
         </Route>

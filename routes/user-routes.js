@@ -11,11 +11,15 @@ dotenv.config();
 
 router.post("/api/createAccount", async (req, res) => {
   const hashedPass = bcrypt.hashSync(req.body.password, saltRounds);
-  const data = await db.User.create({
+  try{const data = await db.User.create({
     email: req.body.email,
     password: hashedPass,
-  }).catch((err) => res.status(404).json(err));
-  res.json(data);
+  })
+  res.status(200).json("Account Created!")
+}catch(err){
+  res.status(400).send(err);
+  
+} 
 });
 
 
@@ -54,7 +58,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Delete User Route//
+//Delete User and associated Images Route//
 router.delete("/api/delete/user/:id", async (req, res) => {
 
   let token = false;
@@ -76,6 +80,7 @@ router.delete("/api/delete/user/:id", async (req, res) => {
       }
     });
     if (tokenMatch) {
+     
       const data = await db.User.destroy( {
         where: {
           id: req.params.id,

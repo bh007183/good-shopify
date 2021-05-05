@@ -18,7 +18,7 @@ export default function PhotoModal(props) {
     public: "false",
   });
 
-
+// cloudinary widget unsecured
   let widget = window.cloudinary.createUploadWidget(
     {
       cloudName: "dc29vpvut",
@@ -36,7 +36,7 @@ export default function PhotoModal(props) {
     }
   );
  
-
+// form change handler and state update
   const onChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -47,6 +47,7 @@ export default function PhotoModal(props) {
     });
   };
 
+  // submit form for adding photo
   const submitForm = async (event) => {
     event.preventDefault();
     await dispatch(postImage(photo))

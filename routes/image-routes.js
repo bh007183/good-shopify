@@ -161,7 +161,7 @@ router.get("/api/edit/:id", async (req, res) => {
   }
 });
 
-/////////Update Image Route//////////
+/////////Update Photo Info//////////
 router.put("/api/updateImage", async (req, res) => {
 
   let token = false;

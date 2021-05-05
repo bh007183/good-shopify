@@ -1,5 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit"
 import {apiCallBegan} from "./apiActions"
+import store from "./store"
+
 
 
 const slice = createSlice({
@@ -7,7 +9,8 @@ const slice = createSlice({
     initialState:{
         CurrentUser: '',
         CurrentUserId: "",
-         onError: []
+        onErrorMessage: "",
+        onSuccessMessage: ""
 
     },
     reducers:{
@@ -18,15 +21,38 @@ const slice = createSlice({
             
         },
         logOut: (User, action)=>{
-            console.log(action)
+            
             User.CurrentUser = action.payload;
             User.CurrentUserId = action.payload;
+        },
+
+        setSuccessMessage: (User, action) => {
+            User.onSuccessMessage = action.payload
+        },
+
+        setErrorMessage: (User, action) => {
+        User.onErrorMessage = action.payload
+        
+        },
+        endErrorMessage:  (User, action) => {
+            
+            User.onErrorMessage = action.payload
+            },
+        endSuccessMessage:  (User, action) => {
+            
+            User.onSuccessMessage = action.payload
+            }
             
         }
-    }
+
+    
 })
-export const {setUser, logOut} = slice.actions
+export const {setUser, logOut, setSuccessMessage, setErrorMessage, endErrorMessage, endSuccessMessage} = slice.actions
 export default slice.reducer
+
+// Below Routes Utilize middleare/api.js//
+
+// route for logging in//
 
 export const loginApi = (data) => apiCallBegan({
     url: "http://localhost:3001/login",
@@ -36,14 +62,18 @@ export const loginApi = (data) => apiCallBegan({
     // onError: setError.type
     
 })
+
+//route for creating account//
 export const createApi = (data) => apiCallBegan({
     url: "http://localhost:3001/api/createAccount",
     method: "POST",
     data: data,
-    onSuccess: window.location.href = "/",
-    // onError: setError.type
+    onSuccess: setSuccessMessage.type,
+    onError: setErrorMessage.type
     
 })
+
+//route for deleting account and associated photos//
 export const deleteAccount = (id) => apiCallBegan({
     url: `http://localhost:3001/api/delete/user/${id}`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },

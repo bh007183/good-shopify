@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { GridList } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { createApi } from "../store/userSlice";
+import { createApi, endErrorMessage, endSuccessMessage } from "../store/userSlice";
+import Alerts from "../components/alerts"
+import {useSelector} from "react-redux"
+
 
 export default function CreateAccount() {
+  const err = useSelector((state) => state.store.User.onErrorMessage);
+  const success = useSelector((state) => state.store.User.onSuccessMessage);
   const dispatch = useDispatch();
 
   const [create, setCreate] = useState({
@@ -26,10 +31,19 @@ export default function CreateAccount() {
   const submitForm = (event) => {
     event.preventDefault();
     dispatch(createApi(create));
+    setTimeout(() => {
+      if(err !== ""){
+        dispatch(endErrorMessage(""))
+      }else{
+        dispatch(endSuccessMessage(""))
+      }
+      
+    }, 5000);
   };
   return (
     <>
       <br></br>
+      {err || success ? <Alerts/> : <></>}
       <br></br>
       <Grid className="center" direction="row" container>
         <form onSubmit={submitForm}>
@@ -68,7 +82,7 @@ export default function CreateAccount() {
               create.verifyPassword !== "" ? (
                 <button type="submit">Create Account</button>
               ) : (
-                <></>
+                <button disabled={true} type="submit">Create Account</button>
               )}
             </Grid>
           </Grid>

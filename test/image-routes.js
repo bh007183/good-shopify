@@ -7,18 +7,7 @@ let should = chai.should()
 
 chai.use(chaiHttp)
 
-// describe("Image", () => {
-//     beforeEach((done) => {
-//         db.Image.destroy({
-//             where:{},
-//             truncate: true
-//         }).then(res => {
-//             done()
-//         }).catch(err => {
-//             console.log(err)
-//         })
-//     })
-// })
+// Handles all test routes. // After run through, the test database resets.//
 
 
 describe("/GET Public Image", () => {
