@@ -33,9 +33,11 @@ export default function CreateAccount() {
     dispatch(createApi(create));
     setTimeout(() => {
       if(err !== ""){
-        dispatch(endErrorMessage(""))
+        dispatch(endErrorMessage(""));
+        window.location.href = "/"
       }else{
-        dispatch(endSuccessMessage(""))
+        dispatch(endSuccessMessage(""));
+        window.location.href = "/"
       }
       
     }, 5000);
